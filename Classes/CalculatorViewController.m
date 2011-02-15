@@ -22,13 +22,30 @@
 - (IBAction)digitPressed:(UIButton *)sender
 {
 	NSString *digit = sender.titleLabel.text;
-	
-	if (userIsInTheMiddleOfTypingANumber) {
-		[display setText:[[display text] stringByAppendingString:digit]];
+	NSRange range = [display.text rangeOfString:@"."];
+
+	if (range.location == NSNotFound) {	
+		if (userIsInTheMiddleOfTypingANumber) {
+			[display setText:[[display text] stringByAppendingString:digit]];
+		}
+		else {
+			[display setText:digit];
+			userIsInTheMiddleOfTypingANumber = YES;
+		}
 	}
 	else {
-		[display setText:digit];
-		userIsInTheMiddleOfTypingANumber = YES;
+		if ([digit isEqual:@"."]) {
+			NSLog(@"Det finns redan ett komma i texten");
+		}
+		else {
+			if (userIsInTheMiddleOfTypingANumber) {
+				[display setText:[[display text] stringByAppendingString:digit]];
+			}
+			else {
+				[display setText:digit];
+				userIsInTheMiddleOfTypingANumber = YES;
+			}
+		}
 	}
 
 }
