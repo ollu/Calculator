@@ -18,24 +18,6 @@
 
 - (void)performWaitingOperation
 {
-//	switch (waitingOperation) {
-//		case @"+":
-//			operand = waitingOperand + operand;
-//			break;
-//		case @"-":
-//			operand = waitingOperand - operand;
-//			break;
-//		case @"*":
-//			operand = waitingOperand * operand;
-//			break;
-//		case @"/":
-//			if (operand) {
-//				operand = waitingOperand / operand;
-//			}
-//			break;
-//		default:
-//			break;
-//	}
 	if ([@"+" isEqual:waitingOperation]) {
 		operand = waitingOperand + operand;
 	}
@@ -57,9 +39,21 @@
 	if ([operation isEqual:@"sqrt"]) {
 		operand = sqrt(operand);
 	}
-	else if ([@"+/-" isEqual:operation])
+	else if ([operation isEqual:@"+/-"])
 	{
 		operand = - operand;
+	}
+	else if ([operation isEqual:@"cos"])
+	{
+		operand = cos(operand);
+	}
+	else if ([operation isEqual:@"sin"])
+	{
+		operand = sin(operand);
+	}
+	else if ([operation isEqual:@"1/x"])
+	{
+		operand = 1 / operand;
 	}
 	else {
 		[self performWaitingOperation];
