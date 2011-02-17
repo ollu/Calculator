@@ -12,7 +12,7 @@
 
 - (CalculatorBrain *)brain
 {
-	// If there is no instance of brain create on and return it.
+	// If there is no instance of brain create one and return it.
 	if (!brain) {
 		brain = [[CalculatorBrain alloc] init];
 	}
@@ -23,7 +23,14 @@
 {
 	NSString *digit = sender.titleLabel.text;
 	NSRange range = [display.text rangeOfString:@"."];
-
+	
+	
+	// Prevent user from starting a number with zero
+	if ([display.text isEqual:@"0"] && [digit isEqual:@"0"]) {
+		return;
+	}
+	
+	
 	if (range.location == NSNotFound) {	
 		if (userIsInTheMiddleOfTypingANumber) {
 			[display setText:[[display text] stringByAppendingString:digit]];
@@ -35,7 +42,7 @@
 	}
 	else {
 		if ([digit isEqual:@"."]) {
-			NSLog(@"Det finns redan ett komma i texten");
+			NSLog(@"The dot can only appear once");
 		}
 		else {
 			if (userIsInTheMiddleOfTypingANumber) {
@@ -47,19 +54,25 @@
 			}
 		}
 	}
-
 }
 
 - (IBAction)operationPressed:(UIButton *)sender
 {
-	if (userIsInTheMiddleOfTypingANumber) {
-		[[self brain] setOperand:[[display text] doubleValue]];
+	NSString *operation = sender.titleLabel.text;
+	
+	if ([operation isEqual:@"C"]) {
+		[display setText:[NSString stringWithFormat:@"0"]];
 		userIsInTheMiddleOfTypingANumber = NO;
 	}
+	else {
+		if (userIsInTheMiddleOfTypingANumber) {
+			[[self brain] setOperand:[[display text] doubleValue]];
+			userIsInTheMiddleOfTypingANumber = NO;
+		}
 	
-	NSString *operation = sender.titleLabel.text;
-	double result = [[self brain] performOperation:operation];
-	[display setText:[NSString stringWithFormat:@"%g", result]];
+		double result = [[self brain] performOperation:operation];
+		[display setText:[NSString stringWithFormat:@"%g", result]];
+	}
 }
 
 @end
