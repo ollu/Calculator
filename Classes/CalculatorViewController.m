@@ -60,19 +60,13 @@
 {
 	NSString *operation = sender.titleLabel.text;
 	
-	if ([operation isEqual:@"C"]) {
-		[display setText:[NSString stringWithFormat:@"0"]];
+	if (userIsInTheMiddleOfTypingANumber) {
+		[[self brain] setOperand:[[display text] doubleValue]];
 		userIsInTheMiddleOfTypingANumber = NO;
 	}
-	else {
-		if (userIsInTheMiddleOfTypingANumber) {
-			[[self brain] setOperand:[[display text] doubleValue]];
-			userIsInTheMiddleOfTypingANumber = NO;
-		}
 	
-		double result = [[self brain] performOperation:operation];
-		[display setText:[NSString stringWithFormat:@"%g", result]];
-	}
+	double result = [[self brain] performOperation:operation];
+	[display setText:[NSString stringWithFormat:@"%g", result]];
 }
 
 @end

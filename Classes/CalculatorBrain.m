@@ -11,6 +11,8 @@
 
 @implementation CalculatorBrain
 
+@synthesize memory;
+
 - (void)setOperand:(double)aDouble
 {
 	operand = aDouble;
@@ -34,6 +36,8 @@
 	}
 }
 
+// operation is the arithmetic send
+// and operand is the number
 - (double)performOperation:(NSString *)operation
 {
 	if ([operation isEqual:@"sqrt"]) {
@@ -55,12 +59,27 @@
 	{
 		operand = 1 / operand;
 	}
+	else if ([operation isEqual:@"M+"])
+	{
+		memory += operand;
+	}
+	else if ([operation isEqual:@"M-"])
+	{
+		memory -= operand;
+	}
+	else if ([operation isEqual:@"MR"])
+	{
+		operand = memory;
+	}
+	else if ([operation isEqual:@"MC"])
+	{
+		memory = 0;
+	}
 	else {
 		[self performWaitingOperation];
 		waitingOperation = operation;
 		waitingOperand = operand;
 	}
-
 
 	return operand;
 }
