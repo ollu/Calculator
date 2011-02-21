@@ -12,11 +12,7 @@
 @implementation CalculatorBrain
 
 @synthesize memory;
-
-- (void)setOperand:(double)aDouble
-{
-	operand = aDouble;
-}
+@synthesize operand;
 
 - (void)performWaitingOperation
 {
@@ -36,7 +32,7 @@
 	}
 }
 
-// operation is the arithmetic send
+// operation is the arithmetic sent
 // and operand is the number
 - (double)performOperation:(NSString *)operation
 {
@@ -74,6 +70,10 @@
 	else if ([operation isEqual:@"MC"])
 	{
 		memory = 0;
+	}
+	else if ([operation isEqual:@"C"])
+	{
+		operand = 0;
 	}
 	else {
 		[self performWaitingOperation];

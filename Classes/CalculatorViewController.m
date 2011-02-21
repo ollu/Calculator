@@ -10,6 +10,8 @@
 
 @implementation CalculatorViewController
 
+
+// "Lazy instanciation"
 - (CalculatorBrain *)brain
 {
 	// If there is no instance of brain create one and return it.
@@ -33,23 +35,26 @@
 	
 	if (range.location == NSNotFound) {	
 		if (userIsInTheMiddleOfTypingANumber) {
-			[display setText:[[display text] stringByAppendingString:digit]];
+			//[display setText:[[display text] stringByAppendingString:digit]];
+			display.text = [display.text stringByAppendingString:digit];
 		}
 		else {
-			[display setText:digit];
+			display.text = digit;
 			userIsInTheMiddleOfTypingANumber = YES;
 		}
 	}
 	else {
 		if ([digit isEqual:@"."]) {
-			NSLog(@"The dot can only appear once");
+			//NSLog(@"The dot can only appear once");
+			return;
 		}
 		else {
 			if (userIsInTheMiddleOfTypingANumber) {
-				[display setText:[[display text] stringByAppendingString:digit]];
+				//[display setText:[[display text] stringByAppendingString:digit]];
+				display.text = [display.text stringByAppendingString:digit];
 			}
 			else {
-				[display setText:digit];
+				display.text = digit;
 				userIsInTheMiddleOfTypingANumber = YES;
 			}
 		}
@@ -61,12 +66,14 @@
 	NSString *operation = sender.titleLabel.text;
 	
 	if (userIsInTheMiddleOfTypingANumber) {
-		[[self brain] setOperand:[[display text] doubleValue]];
+		//[[self brain] setOperand:[[display text] doubleValue]];
+		[self brain].operand = [[display text] doubleValue];
 		userIsInTheMiddleOfTypingANumber = NO;
 	}
 	
 	double result = [[self brain] performOperation:operation];
-	[display setText:[NSString stringWithFormat:@"%g", result]];
+	//[display setText:[NSString stringWithFormat:@"%g", result]];
+	display.text = [NSString stringWithFormat:@"%g", result];
 }
 
 @end
