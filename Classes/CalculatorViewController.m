@@ -8,6 +8,11 @@
 
 #import "CalculatorViewController.h"
 
+@interface CalculatorViewController()
+@property (readonly) CalculatorBrain *brain;
+@end
+
+
 @implementation CalculatorViewController
 
 
@@ -67,13 +72,14 @@
 	
 	if (userIsInTheMiddleOfTypingANumber) {
 		//[[self brain] setOperand:[[display text] doubleValue]];
-		[self brain].operand = [[display text] doubleValue];
+		self.brain.operand = [display.text doubleValue];
 		userIsInTheMiddleOfTypingANumber = NO;
 	}
 	
-	double result = [[self brain] performOperation:operation];
+	//double result = [[self brain] performOperation:operation];
 	//[display setText:[NSString stringWithFormat:@"%g", result]];
-	display.text = [NSString stringWithFormat:@"%g", result];
+	[self.brain performOperation:operation];
+	display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
 }
 
 @end
