@@ -76,6 +76,8 @@
 	else if ([operation isEqual:@"C"])
 	{
 		operand = 0;
+		waitingOperand = 0;
+		waitingOperation = nil;
 	}
 	else {
 		[self performWaitingOperation];
