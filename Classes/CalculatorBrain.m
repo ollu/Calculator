@@ -15,7 +15,7 @@
 @synthesize operand;
 
 - (void)performWaitingOperation
-{
+{	
 	if ([@"+" isEqual:waitingOperation]) {
 		operand = waitingOperand + operand;
 	}
@@ -23,7 +23,7 @@
 		operand = waitingOperand - operand;
 	}
 	else if ([@"*" isEqual:waitingOperation]) {
-		operand = waitingOperand - operand;
+		operand = waitingOperand * operand;
 	}
 	else if ([@"/" isEqual:waitingOperation]) {
 		if (operand) {
@@ -36,6 +36,8 @@
 // and operand is the number
 - (double)performOperation:(NSString *)operation
 {
+		NSLog(@"%@", operation);
+	
 	if ([operation isEqual:@"sqrt"]) {
 		operand = sqrt(operand);
 	}
