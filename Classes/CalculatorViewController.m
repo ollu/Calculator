@@ -8,13 +8,10 @@
 
 #import "CalculatorViewController.h"
 
-@interface CalculatorViewController()
-@property (readonly) CalculatorBrain *brain;
-@end
-
 
 @implementation CalculatorViewController
 
+@synthesize brain;
 
 // "Lazy instanciation"
 - (CalculatorBrain *)brain
