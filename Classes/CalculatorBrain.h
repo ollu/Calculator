@@ -15,11 +15,14 @@
 	NSString *waitingOperation;
 	double waitingOperand;
 	double memory;
+	NSMutableArray *internalExpression;
 }
 
 @property double memory;
 @property double operand;
+@property (nonatomic, retain) NSMutableArray *internalExpression;
 
+- (void)buildExpression:(NSString *)sender;
 - (double)performOperation:(NSString *)operation;
 
 @end

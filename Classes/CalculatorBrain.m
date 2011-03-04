@@ -13,6 +13,15 @@
 
 @synthesize memory;
 @synthesize operand;
+@synthesize internalExpression;
+
+- (id) init {
+	if (self = [super init]) {
+		internalExpression = [[NSMutableArray alloc] init];
+		NSLog(@"Brain init");
+	}
+	return self;
+}
 
 - (void)performWaitingOperation
 {	
@@ -35,9 +44,7 @@
 // operation is the arithmetic sent
 // and operand is the number
 - (double)performOperation:(NSString *)operation
-{
-		NSLog(@"%@", operation);
-	
+{	
 	if ([operation isEqual:@"sqrt"]) {
 		operand = sqrt(operand);
 	}
@@ -86,6 +93,29 @@
 	}
 
 	return operand;
+}
+
+- (void)buildExpression:(NSString *)sender {
+	
+	NSNumberFormatter * nf = [[NSNumberFormatter alloc] init];
+	[nf setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSNumber * myNumber = [nf numberFromString:sender];
+
+	if (myNumber) {
+		[internalExpression addObject:myNumber];
+	}
+	else {
+		if (![sender isEqual:@"C"]) {
+			[internalExpression addObject:sender];
+		}
+	}
+	
+	[nf release];
+}
+
+- (void)dealloc {
+	[internalExpression release];
+	[super dealloc];
 }
 
 @end

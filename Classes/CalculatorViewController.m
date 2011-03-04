@@ -13,14 +13,8 @@
 
 @synthesize brain;
 
-// "Lazy instanciation"
-- (CalculatorBrain *)brain
-{
-	// If there is no instance of brain create one and return it.
-	if (!brain) {
-		brain = [[CalculatorBrain alloc] init];
-	}
-	return brain;
+- (void)viewDidLoad {
+	brain = [[CalculatorBrain alloc] init];
 }
 
 - (void)updateDisplay:(NSString *)digit {
@@ -41,19 +35,22 @@
 	
 	// Prevent user from starting a number with zero
 	if ([display.text isEqual:@"0"] && [digit isEqual:@"0"]) {
+		//NSLog(@"Cannot start expression with a zero");
 		return;
 	}
 	
 	
 	if (range.location == NSNotFound) {	
+		[self.brain buildExpression:digit];
 		[self updateDisplay:digit];
-	}
+	} 
 	else {
 		if ([digit isEqual:@"."]) {
 			//NSLog(@"The dot can only appear once");
 			return;
-		}
+		} 
 		else {
+			[self.brain buildExpression:digit];
 			[self updateDisplay:digit];
 		}
 	}
@@ -62,15 +59,13 @@
 - (IBAction)operationPressed:(UIButton *)sender
 {
 	NSString *operation = sender.titleLabel.text;
+	[self.brain buildExpression:operation];
 	
 	if (userIsInTheMiddleOfTypingANumber) {
-		//[[self brain] setOperand:[[display text] doubleValue]];
 		self.brain.operand = [display.text doubleValue];
 		userIsInTheMiddleOfTypingANumber = NO;
 	}
 	
-	//double result = [[self brain] performOperation:operation];
-	//[display setText:[NSString stringWithFormat:@"%g", result]];
 	[self.brain performOperation:operation];
 	display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
 }
