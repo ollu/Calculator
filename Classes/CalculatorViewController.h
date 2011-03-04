@@ -17,6 +17,7 @@
 
 @property (nonatomic, readonly) CalculatorBrain *brain;
 
+- (void)updateDisplay:(NSString *)digit;
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
 

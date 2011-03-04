@@ -23,6 +23,16 @@
 	return brain;
 }
 
+- (void)updateDisplay:(NSString *)digit {
+	if (userIsInTheMiddleOfTypingANumber) {
+		display.text = [display.text stringByAppendingString:digit];
+	}
+	else {
+		display.text = digit;
+		userIsInTheMiddleOfTypingANumber = YES;
+	}
+}
+
 - (IBAction)digitPressed:(UIButton *)sender
 {
 	NSString *digit = sender.titleLabel.text;
@@ -36,14 +46,7 @@
 	
 	
 	if (range.location == NSNotFound) {	
-		if (userIsInTheMiddleOfTypingANumber) {
-			//[display setText:[[display text] stringByAppendingString:digit]];
-			display.text = [display.text stringByAppendingString:digit];
-		}
-		else {
-			display.text = digit;
-			userIsInTheMiddleOfTypingANumber = YES;
-		}
+		[self updateDisplay:digit];
 	}
 	else {
 		if ([digit isEqual:@"."]) {
@@ -51,14 +54,7 @@
 			return;
 		}
 		else {
-			if (userIsInTheMiddleOfTypingANumber) {
-				//[display setText:[[display text] stringByAppendingString:digit]];
-				display.text = [display.text stringByAppendingString:digit];
-			}
-			else {
-				display.text = digit;
-				userIsInTheMiddleOfTypingANumber = YES;
-			}
+			[self updateDisplay:digit];
 		}
 	}
 }
