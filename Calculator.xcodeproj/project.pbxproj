@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* CalculatorViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* CalculatorViewController.m */; };
+		492A6A171321982300F1092E /* ButtonBackgroundGreenTall.png in Resources */ = {isa = PBXBuildFile; fileRef = 492A6A161321982300F1092E /* ButtonBackgroundGreenTall.png */; };
 		4983C5011315857300866FA1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4983C5001315857300866FA1 /* icon.png */; };
 		49F2548C1321654A00F83802 /* ButtonBackgroundBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F254861321654A00F83802 /* ButtonBackgroundBlack.png */; };
 		49F2548D1321654A00F83802 /* ButtonBackgroundDarkGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 49F254871321654A00F83802 /* ButtonBackgroundDarkGrey.png */; };
@@ -39,6 +40,7 @@
 		28D7ACF70DDB3853001CB0EB /* CalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Calculator_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calculator_Prefix.pch; sourceTree = "<group>"; };
+		492A6A161321982300F1092E /* ButtonBackgroundGreenTall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackgroundGreenTall.png; path = assets/ButtonBackgroundGreenTall.png; sourceTree = "<group>"; };
 		4983C5001315857300866FA1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = assets/icon.png; sourceTree = "<group>"; };
 		49F254861321654A00F83802 /* ButtonBackgroundBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackgroundBlack.png; path = assets/ButtonBackgroundBlack.png; sourceTree = "<group>"; };
 		49F254871321654A00F83802 /* ButtonBackgroundDarkGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonBackgroundDarkGrey.png; path = assets/ButtonBackgroundDarkGrey.png; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		4983C4EF1315827300866FA1 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				492A6A161321982300F1092E /* ButtonBackgroundGreenTall.png */,
 				49F254861321654A00F83802 /* ButtonBackgroundBlack.png */,
 				49F254871321654A00F83802 /* ButtonBackgroundDarkGrey.png */,
 				49F254881321654A00F83802 /* ButtonBackgroundGreenWide.png */,
@@ -203,6 +206,7 @@
 				49F2548F1321654A00F83802 /* ButtonBackgroundGrey.png in Resources */,
 				49F254901321654A00F83802 /* ButtonBackgroundGreyWide.png in Resources */,
 				49F254911321654A00F83802 /* ButtonBackgroundRed.png in Resources */,
+				492A6A171321982300F1092E /* ButtonBackgroundGreenTall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

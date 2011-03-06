@@ -15,15 +15,38 @@
 
 - (void)viewDidLoad {
 	brain = [[CalculatorBrain alloc] init];
+	userIsTypingAnExpression = NO;
+	userIsInTheMiddleOfTypingANumber = NO;
+
+}
+
+- (NSMutableString *)arrayToString:(NSArray *)input {
+	NSMutableString *concatedExpression = [[NSMutableString alloc] init];
+	
+	for (NSObject *obj in input) {
+		if ([obj isKindOfClass:[NSNumber class]]) {
+			[concatedExpression appendString:[obj description]];
+		}
+		else {
+			[concatedExpression appendString:[obj description]];
+		}
+	}
+	[concatedExpression autorelease];
+	return concatedExpression;
 }
 
 - (void)updateDisplay:(NSString *)digit {
-	if (userIsInTheMiddleOfTypingANumber) {
-		display.text = [display.text stringByAppendingString:digit];
+	if (userIsTypingAnExpression) {
+		display.text = [self arrayToString:brain.internalExpression];
 	}
 	else {
-		display.text = digit;
-		userIsInTheMiddleOfTypingANumber = YES;
+		if (userIsInTheMiddleOfTypingANumber) {
+			display.text = [display.text stringByAppendingString:digit];
+		}
+		else {
+			display.text = digit;
+			userIsInTheMiddleOfTypingANumber = YES;
+		}	
 	}
 }
 
@@ -31,15 +54,13 @@
 {
 	NSString *digit = sender.titleLabel.text;
 	NSRange range = [display.text rangeOfString:@"."];
-	
-	
+
 	// Prevent user from starting a number with zero
 	if ([display.text isEqual:@"0"] && [digit isEqual:@"0"]) {
 		//NSLog(@"Cannot start expression with a zero");
 		return;
 	}
-	
-	
+
 	if (range.location == NSNotFound) {	
 		[self.brain buildExpression:digit];
 		[self updateDisplay:digit];
@@ -56,18 +77,38 @@
 	}
 }
 
+- (void)clearAll {
+	display.text = @"0";
+	brain.operand = 0;
+	brain.waitingOperand = 0;
+	brain.waitingOperation = nil;
+	[brain.internalExpression removeAllObjects];
+	
+	userIsTypingAnExpression = NO;
+	userIsInTheMiddleOfTypingANumber = NO;
+}
+
 - (IBAction)operationPressed:(UIButton *)sender
 {
 	NSString *operation = sender.titleLabel.text;
 	[self.brain buildExpression:operation];
 	
-	if (userIsInTheMiddleOfTypingANumber) {
-		self.brain.operand = [display.text doubleValue];
-		userIsInTheMiddleOfTypingANumber = NO;
+	if ([operation isEqual:@"x"] || [operation isEqual:@"y"] || [operation isEqual:@"z"]) {
+		userIsTypingAnExpression = YES;
 	}
-	
-	[self.brain performOperation:operation];
-	display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
+
+	if ([operation isEqual:@"C"]) {
+		[self clearAll];
+	}
+	else {
+		if (userIsInTheMiddleOfTypingANumber) {
+			self.brain.operand = [display.text doubleValue];
+			userIsInTheMiddleOfTypingANumber = NO;
+		}
+		
+		[self.brain performOperation:operation];
+		display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
+	}
 }
 
 @end

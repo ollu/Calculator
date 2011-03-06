@@ -13,11 +13,14 @@
 	IBOutlet UILabel *display;
 	CalculatorBrain *brain;
 	BOOL userIsInTheMiddleOfTypingANumber;
+	BOOL userIsTypingAnExpression;
 }
 
 @property (nonatomic, readonly) CalculatorBrain *brain;
 
 - (void)updateDisplay:(NSString *)digit;
+- (NSMutableString *)arrayToString:(NSArray *)input;
+- (void)clearAll;
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
 

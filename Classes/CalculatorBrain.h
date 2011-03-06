@@ -20,6 +20,9 @@
 
 @property double memory;
 @property double operand;
+@property double waitingOperand;
+
+@property (nonatomic, retain) NSString *waitingOperation;
 @property (nonatomic, retain) NSMutableArray *internalExpression;
 
 - (void)buildExpression:(NSString *)sender;

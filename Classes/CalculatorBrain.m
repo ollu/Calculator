@@ -11,9 +11,11 @@
 
 @implementation CalculatorBrain
 
-@synthesize memory;
+@synthesize memory;				// What's stored in the memory
 @synthesize operand;
-@synthesize internalExpression;
+@synthesize waitingOperand;		// Queued operand
+@synthesize waitingOperation;
+@synthesize internalExpression;	// The complete operation
 
 - (id) init {
 	if (self = [super init]) {
@@ -80,12 +82,6 @@
 	{
 		memory = 0;
 	}
-	else if ([operation isEqual:@"C"])
-	{
-		operand = 0;
-		waitingOperand = 0;
-		waitingOperation = nil;
-	}
 	else {
 		[self performWaitingOperation];
 		waitingOperation = operation;
@@ -96,6 +92,10 @@
 }
 
 - (void)buildExpression:(NSString *)sender {
+	
+	if ([sender isEqual:@"MC"] || [sender isEqual:@"MR"] || [sender isEqual:@"C"]) {
+		return;
+	}
 	
 	NSNumberFormatter * nf = [[NSNumberFormatter alloc] init];
 	[nf setNumberStyle:NSNumberFormatterDecimalStyle];
