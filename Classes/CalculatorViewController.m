@@ -103,18 +103,37 @@
 		userIsTypingAnExpression = YES;
 	}
 
-	if ([operation isEqual:@"C"]) {
-		[self clearAll];
+	if (userIsTypingAnExpression && [operation isEqual:@"="]) {
+		NSLog(@"lastObject: %@",[brain.internalExpression lastObject]);
+			[self updateDisplay:operation];
 	}
 	else {
-		if (userIsInTheMiddleOfTypingANumber) {
-			self.brain.operand = [display.text doubleValue];
-			userIsInTheMiddleOfTypingANumber = NO;
+		if ([operation isEqual:@"C"]) {
+			[self clearAll];
+		}
+		else {
+			if (userIsInTheMiddleOfTypingANumber) {
+				self.brain.operand = [display.text doubleValue];
+				userIsInTheMiddleOfTypingANumber = NO;
+			}
+			
+			[self.brain performOperation:operation];
+			display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
 		}
 		
-		[self.brain performOperation:operation];
-		display.text = [NSString stringWithFormat:@"%g", self.brain.operand];
+		if (userIsTypingAnExpression) {
+			[self updateDisplay:operation];
+		}
 	}
+	
+}
+
+- (IBAction)solve:(UIButton *)sender {
+	NSLog(@"Expression: %@", [self evaluateExpression:brain.internalExpression]);
+}
+
+- (NSMutableString *)evaluateExpression:(NSMutableArray *)expression {
+	return [self arrayToString:expression];
 }
 
 @end

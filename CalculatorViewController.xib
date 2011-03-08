@@ -925,6 +925,15 @@
 					</object>
 					<int key="connectionID">73</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">solve:</string>
+						<reference key="source" ref="479818236"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">74</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1317,7 +1326,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDBgAAwtQAAA</bytes>
 					</object>
-					<string>{{403, 362}, {320, 480}}</string>
+					<string>{{404, 634}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -1369,7 +1378,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">73</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1383,9 +1392,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>digitPressed:</string>
 							<string>operationPressed:</string>
+							<string>solve:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 						</object>
@@ -1396,6 +1407,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>digitPressed:</string>
 							<string>operationPressed:</string>
+							<string>solve:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1405,6 +1417,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">operationPressed:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">solve:</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>
