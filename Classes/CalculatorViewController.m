@@ -88,6 +88,12 @@
 	userIsInTheMiddleOfTypingANumber = NO;
 }
 
+- (NSDictionary *)testVariablesValue {
+	return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:13], @"x",
+													  [NSNumber numberWithFloat:23.8], @"y", 
+													  [NSNumber numberWithFloat:8], @"z", nil];
+}
+
 - (IBAction)operationPressed:(UIButton *)sender
 {
 	NSString *operation = sender.titleLabel.text;

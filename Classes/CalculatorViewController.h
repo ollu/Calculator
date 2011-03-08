@@ -21,6 +21,8 @@
 - (void)updateDisplay:(NSString *)digit;
 - (NSMutableString *)arrayToString:(NSArray *)input;
 - (void)clearAll;
+- (NSDictionary *)testVariablesValue;
+
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
 
