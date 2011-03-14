@@ -97,7 +97,6 @@
 - (IBAction)operationPressed:(UIButton *)sender
 {
 	NSString *operation = sender.titleLabel.text;
-	[self.brain buildExpression:operation];
 	
 	if ([operation isEqual:@"x"] || [operation isEqual:@"y"] || [operation isEqual:@"z"]) {
 		userIsTypingAnExpression = YES;
@@ -105,13 +104,21 @@
 
 	if (userIsTypingAnExpression && [operation isEqual:@"="]) {
 		NSLog(@"lastObject: %@",[brain.internalExpression lastObject]);
+		NSLog(@"Current operation: %@", [operation isEqual:[brain.internalExpression lastObject]]);
+
+		if (![operation isEqual:[brain.internalExpression lastObject]]) {
+			[self.brain buildExpression:operation];
 			[self updateDisplay:operation];
+		}
 	}
 	else {
 		if ([operation isEqual:@"C"]) {
 			[self clearAll];
 		}
 		else {
+			
+			[self.brain buildExpression:operation];
+			
 			if (userIsInTheMiddleOfTypingANumber) {
 				self.brain.operand = [display.text doubleValue];
 				userIsInTheMiddleOfTypingANumber = NO;
@@ -125,11 +132,27 @@
 			[self updateDisplay:operation];
 		}
 	}
-	
 }
 
 - (IBAction)solve:(UIButton *)sender {
-	NSLog(@"Expression: %@", [self evaluateExpression:brain.internalExpression]);
+
+	
+	NSDictionary *testValues = [self testVariablesValue];
+	
+	for (int i = 0; i < [brain.internalExpression count]; i++) {
+
+		id myArrayElement = [brain.internalExpression objectAtIndex:i];
+
+		if ([myArrayElement isEqual:@"x"] || [myArrayElement isEqual:@"y"] || [myArrayElement isEqual:@"z"]) {
+			[brain.internalExpression replaceObjectAtIndex:i withObject:[testValues valueForKey:myArrayElement]];
+
+			// Update display
+			[self updateDisplay:nil];
+			userIsTypingAnExpression = NO;
+		}
+	}
+	
+//	NSLog(@"Expression: %@", [self evaluateExpression:brain.internalExpression]);
 }
 
 - (NSMutableString *)evaluateExpression:(NSMutableArray *)expression {
